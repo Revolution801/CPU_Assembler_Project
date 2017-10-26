@@ -23,7 +23,7 @@ namespace Assembler
                 return;
             }
 
-
+            Console.WriteLine("Begin encoding.");
             try
             {
                 using (System.IO.StreamReader firstPass = new System.IO.StreamReader(args[0]))
@@ -279,6 +279,7 @@ namespace Assembler
                                 }
                             }
                             sr.WriteLine();
+                            
                         }
                     }
                 }
@@ -288,6 +289,7 @@ namespace Assembler
                 Console.WriteLine("Error reading or writing on second pass");
                 throw new Exception("Error reading or writing on second pass" + e.Message);
             }
+            Console.WriteLine("Encoding complete.");
             Console.Read();
         }
 
