@@ -6,6 +6,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+
+// Changes rafi to RW and we need to change the encoding to accept another register as 
+// its encoding for 32 bit instructions(zero'd out if there is no need for another register)
 namespace Assembler
 {
     class Program
@@ -66,7 +69,7 @@ namespace Assembler
                                 case "bne":
                                 case "bgt":
                                 case "blt":
-                                case "rafi":
+                                case "rw":
                                 case "ww":
                                 case "wi":
                                 case "movi":
@@ -232,8 +235,8 @@ namespace Assembler
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[1]) + ",");
                                         break;
-                                    case "rafi":
-                                        writeInstruction(sr, '1', (int)instructions.rafi);
+                                    case "rw":
+                                        writeInstruction(sr, '1', (int)instructions.rw);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
                                         sr.WriteLine();
@@ -433,7 +436,7 @@ namespace Assembler
             bne = 14,
             bgt = 15,
             blt = 16,
-            rafi = 17,
+            rw = 17,
             ww = 18,
             wi = 19,
             movi = 20,
