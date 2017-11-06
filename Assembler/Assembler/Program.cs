@@ -157,22 +157,26 @@ namespace Assembler
                                         sr.Write(regDecoding(tokens[2]));
                                         sr.Write(",\n");
                                         break;
+                                    // Second Register will have 5 bit immediate instead of register index
                                     case "sl":
                                         writeInstruction(sr, '0', (int)instructions.sl);
+                                        string temp = regDecoding(tokens[2]);
+                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(regDecoding(tokens[2]));
                                         sr.Write(",\n");
                                         break;
                                     case "srl":
                                         writeInstruction(sr, '0', (int)instructions.srl);
+                                        temp = regDecoding(tokens[2]);
+                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(regDecoding(tokens[2]));
                                         sr.Write(",\n");
                                         break;
                                     case "sra":
                                         writeInstruction(sr, '0', (int)instructions.sra);
+                                        temp = regDecoding(tokens[2]);
+                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(regDecoding(tokens[2]));
                                         sr.Write(",\n");
                                         break;
                                     case "jr":
@@ -185,29 +189,29 @@ namespace Assembler
                                     // 32 bit instructions
                                     case "addi":
                                         writeInstruction(sr, '1', (int)instructions.addi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "subi":
                                         writeInstruction(sr, '1', (int)instructions.subi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "andi":
                                         writeInstruction(sr, '1', (int)instructions.andi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "ori":
                                         writeInstruction(sr, '1', (int)instructions.ori);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
@@ -235,6 +239,7 @@ namespace Assembler
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[1]) + ",");
                                         break;
+                                    // Get other register instead of 0'ing out 5 bits
                                     case "rw":
                                         writeInstruction(sr, '1', (int)instructions.rw);
                                         sr.Write(regDecoding(tokens[1]));
@@ -271,7 +276,7 @@ namespace Assembler
                                         break;
                                     case "jal":
                                         writeInstruction(sr, '1', (int)instructions.jal);
-                                        sr.Write("0000000000,");
+                                        sr.Write("0000000101,");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[1]) + ",");
                                         break;
