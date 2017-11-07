@@ -121,43 +121,43 @@ namespace Assembler
                                         writeInstruction(sr, '0', (int)instructions.add);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "and":
                                         writeInstruction(sr, '0', (int)instructions.and);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "or":
                                         writeInstruction(sr, '0', (int)instructions.or);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "cmp":
                                         writeInstruction(sr, '0', (int)instructions.cmp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "sub":
                                         writeInstruction(sr, '0', (int)instructions.sub);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "mov":
                                         writeInstruction(sr, '0', (int)instructions.mov);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "rafr":
                                         writeInstruction(sr, '0', (int)instructions.rafr);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     // Second Register will have 5 bit immediate instead of register index
                                     case "sl":
@@ -165,27 +165,27 @@ namespace Assembler
                                         string temp = regDecoding(tokens[2]);
                                         sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "srl":
                                         writeInstruction(sr, '0', (int)instructions.srl);
                                         temp = regDecoding(tokens[2]);
                                         sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "sra":
                                         writeInstruction(sr, '0', (int)instructions.sra);
                                         temp = regDecoding(tokens[2]);
                                         sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
                                     case "jr":
                                         writeInstruction(sr, '0', (int)instructions.jr);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000");
-                                        sr.Write(",\n");
+                                        sr.Write(",");
                                         break;
 
                                     // 32 bit instructions
