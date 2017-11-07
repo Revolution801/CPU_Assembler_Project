@@ -100,7 +100,9 @@ namespace Assembler
                     //output file will be supplied by command line arg 2
                     using (System.IO.StreamWriter sr = new System.IO.StreamWriter(args[1]))
                     {
-
+                        sr.WriteLine("memory_initialization_radix=2;");
+                        sr.WriteLine("memory_initialization_vector=");
+                        sr.WriteLine("");
                         while ((line = secondPass.ReadLine()) != null)
                         {
                             if (!line[0].Equals('\t'))
@@ -189,29 +191,29 @@ namespace Assembler
                                     // 32 bit instructions
                                     case "addi":
                                         writeInstruction(sr, '1', (int)instructions.addi);
-                                        sr.Write("00000,");
                                         sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000,");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "subi":
                                         writeInstruction(sr, '1', (int)instructions.subi);
-                                        sr.Write("00000,");
                                         sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000,");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "andi":
                                         writeInstruction(sr, '1', (int)instructions.andi);
-                                        sr.Write("00000,");
                                         sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000,");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "ori":
                                         writeInstruction(sr, '1', (int)instructions.ori);
-                                        sr.Write("00000,");
                                         sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000,");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
@@ -250,9 +252,9 @@ namespace Assembler
                                     case "ww":
                                         writeInstruction(sr, '1', (int)instructions.ww);
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write("00000,");
-                                        sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
+                                        sr.WriteLine();
+                                        sr.Write(regDecoding(tokens[3]) + ",");
                                         break;
                                     case "wi":
                                         writeInstruction(sr, '1', (int)instructions.wi);
@@ -263,8 +265,8 @@ namespace Assembler
                                         break;
                                     case "movi":
                                         writeInstruction(sr, '1', (int)instructions.movi);
-                                        sr.Write(regDecoding(tokens[1]));
-                                        sr.Write("00000,");
+                                        sr.Write("00000");
+                                        sr.Write(regDecoding(tokens[1])+",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
@@ -392,9 +394,23 @@ namespace Assembler
             {
                 StringBuilder binaryString = new StringBuilder();
                 // Convert each hex digit into a 4 bit decimal and concatenate them into a string
-                binaryString.Append(String.Join(String.Empty, curr.Substring(2).Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2))));
 
-                // Pad beginning with 0's to make 21 bit binary string
+
+                binaryString.Append(String.Join(String.Empty, curr.Substring(2).Select(c =>
+                {
+                if (c == '0')
+                {
+                    return "0000";
+                }
+                else
+                {
+                        StringBuilder intermediate = new StringBuilder();
+                        intermediate.Append(Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2));
+                        return intermediate.Insert(0, "0", 4 - intermediate.Length).ToString();
+                    }
+                })));
+                
+                // Pad beginning with 0's to make 16 bit binary string
                 binaryString.Insert(0, "0", 16 - binaryString.Length);
                 return binaryString.ToString();
             }
