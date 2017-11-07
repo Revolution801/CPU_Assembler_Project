@@ -1,13 +1,6 @@
-sum_array:
-	mov !temp0, !temp3 
-	mov !zero, !temp0   
-	mov !zero, !temp1   
+	movi !temp0, 0x30
+	mov !zero, !temp1
 loop:
-	add !temp1, !temp3    
-	rafr !temp3, !temp2  
-	add !temp1, !temp0  
-	addi !temp1, 0x1      
-	cmp !temp1, 0x5     
-	blt loop
-	mov !temp0, !ret0
-	jr !ra
+	ww !temp0, !temp1, 0x0
+	addi !temp1, 0x1
+	j loop
