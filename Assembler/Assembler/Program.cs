@@ -53,7 +53,6 @@ namespace Assembler
                                 case "cmp":
                                 case "sub":
                                 case "mov":
-                                case "rafr":
                                 case "sl":
                                 case "srl":
                                 case "sra":
@@ -71,7 +70,6 @@ namespace Assembler
                                 case "blt":
                                 case "rw":
                                 case "ww":
-                                case "wi":
                                 case "movi":
                                 case "j":
                                 case "jal":
@@ -153,12 +151,6 @@ namespace Assembler
                                         sr.Write(regDecoding(tokens[2]));
                                         sr.Write(",");
                                         break;
-                                    case "rafr":
-                                        writeInstruction(sr, '0', (int)instructions.rafr);
-                                        sr.Write(regDecoding(tokens[1]));
-                                        sr.Write(regDecoding(tokens[2]));
-                                        sr.Write(",");
-                                        break;
                                     // Second Register will have 5 bit immediate instead of register index
                                     case "sl":
                                         writeInstruction(sr, '0', (int)instructions.sl);
@@ -191,29 +183,29 @@ namespace Assembler
                                     // 32 bit instructions
                                     case "addi":
                                         writeInstruction(sr, '1', (int)instructions.addi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "subi":
                                         writeInstruction(sr, '1', (int)instructions.subi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "andi":
                                         writeInstruction(sr, '1', (int)instructions.andi);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "ori":
                                         writeInstruction(sr, '1', (int)instructions.ori);
-                                        sr.Write(regDecoding(tokens[1]));
                                         sr.Write("00000,");
+                                        sr.Write(regDecoding(tokens[1]));
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
@@ -255,13 +247,6 @@ namespace Assembler
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[3]) + ",");
-                                        break;
-                                    case "wi":
-                                        writeInstruction(sr, '1', (int)instructions.wi);
-                                        sr.Write(regDecoding(tokens[1]));
-                                        sr.Write("00000,");
-                                        sr.WriteLine();
-                                        sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "movi":
                                         writeInstruction(sr, '1', (int)instructions.movi);
@@ -459,12 +444,10 @@ namespace Assembler
             blt = 16,
             rw = 17,
             ww = 18,
-            wi = 19,
             movi = 20,
             j = 21,
             jal = 22,
-            jr = 23,
-            rafr = 24
+            jr = 23
         };
 
         enum registers
