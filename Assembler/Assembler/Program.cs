@@ -245,9 +245,9 @@ namespace Assembler
                                     case "rw":
                                         writeInstruction(sr, '1', (int)instructions.rw);
                                         sr.Write(regDecoding(tokens[1]));
-                                        sr.Write("00000,");
-                                        sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
+                                        sr.WriteLine();
+                                        sr.Write(regDecoding(tokens[3]) + ",");
                                         break;
                                     case "ww":
                                         writeInstruction(sr, '1', (int)instructions.ww);
