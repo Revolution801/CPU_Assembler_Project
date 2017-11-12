@@ -33,9 +33,13 @@ namespace Assembler
                 {
                     while ((line = firstPass.ReadLine()) != null)
                     {
+                        if (String.IsNullOrEmpty(line))
+                        {
+                            continue;
+                        }
                         if (!line[0].Equals('\t'))
                         {
-                            line = line.Substring(0, line.Length - 1);
+                            line = line.Substring(0, line.LastIndexOf(':'));
                             StringBuilder bits = new StringBuilder();
                              bits.Append(Convert.ToString(bitsRead, 2));
                             labelMap.Add(line, bits.Insert(0, "0", 16 - bits.Length).ToString());
@@ -108,6 +112,11 @@ namespace Assembler
                                 continue;
                             }
 
+                            if (String.IsNullOrEmpty(line))
+                            {
+                                continue;
+                            }
+
                             else
                             {
                                 List<string> tokens = new List<string>(line.Split(new char[] { ' ', '\t', ',' }).Where(s => (!string.IsNullOrWhiteSpace(s))));
@@ -155,21 +164,24 @@ namespace Assembler
                                     case "sl":
                                         writeInstruction(sr, '0', (int)instructions.sl);
                                         string temp = regDecoding(tokens[2]);
-                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
+                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
                                         break;
                                     case "srl":
                                         writeInstruction(sr, '0', (int)instructions.srl);
                                         temp = regDecoding(tokens[2]);
-                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
+                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
                                         break;
                                     case "sra":
                                         writeInstruction(sr, '0', (int)instructions.sra);
                                         temp = regDecoding(tokens[2]);
-                                        sr.Write(temp.Substring(temp.Length - 6, temp.Length - 1));
+                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
                                         break;
@@ -183,29 +195,29 @@ namespace Assembler
                                     // 32 bit instructions
                                     case "addi":
                                         writeInstruction(sr, '1', (int)instructions.addi);
-                                        sr.Write("00000,");
-                                        sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000");
+                                        sr.Write(regDecoding(tokens[1]) + ",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "subi":
                                         writeInstruction(sr, '1', (int)instructions.subi);
-                                        sr.Write("00000,");
-                                        sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000");
+                                        sr.Write(regDecoding(tokens[1]) + ",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "andi":
                                         writeInstruction(sr, '1', (int)instructions.andi);
-                                        sr.Write("00000,");
-                                        sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000");
+                                        sr.Write(regDecoding(tokens[1]) + ",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
                                     case "ori":
                                         writeInstruction(sr, '1', (int)instructions.ori);
-                                        sr.Write("00000,");
-                                        sr.Write(regDecoding(tokens[1]));
+                                        sr.Write("00000");
+                                        sr.Write(regDecoding(tokens[1]) + ",");
                                         sr.WriteLine();
                                         sr.Write(regDecoding(tokens[2]) + ",");
                                         break;
