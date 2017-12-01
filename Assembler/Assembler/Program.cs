@@ -164,7 +164,7 @@ namespace Assembler
                                     case "sl":
                                         writeInstruction(sr, '0', (int)instructions.sl);
                                         string temp = regDecoding(tokens[2]);
-                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        temp = temp.Substring(temp.Length - 5, 5);
                                         sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
@@ -172,7 +172,7 @@ namespace Assembler
                                     case "srl":
                                         writeInstruction(sr, '0', (int)instructions.srl);
                                         temp = regDecoding(tokens[2]);
-                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        temp = temp.Substring(temp.Length - 5, 5);
                                         sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
@@ -180,7 +180,7 @@ namespace Assembler
                                     case "sra":
                                         writeInstruction(sr, '0', (int)instructions.sra);
                                         temp = regDecoding(tokens[2]);
-                                        temp = temp.Substring(temp.Length - 6, 5);
+                                        temp = temp.Substring(temp.Length - 5, 5);
                                         sr.Write(temp);
                                         sr.Write(regDecoding(tokens[1]));
                                         sr.Write(",");
