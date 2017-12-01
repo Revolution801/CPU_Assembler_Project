@@ -61,7 +61,7 @@ namespace Assembler
                                 case "srl":
                                 case "sra":
                                 case "jr":
-                                    bitsRead += 16;
+                                    bitsRead += 1;
                                     break;
                                 // TWO WORD INSTRUCTIONS
                                 case "addi":
@@ -77,7 +77,7 @@ namespace Assembler
                                 case "movi":
                                 case "j":
                                 case "jal":
-                                    bitsRead += 32;
+                                    bitsRead += 2;
                                     break;
 
                                 default:
